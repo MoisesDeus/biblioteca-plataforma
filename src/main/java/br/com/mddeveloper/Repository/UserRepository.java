@@ -3,7 +3,6 @@ package br.com.mddeveloper.Repository;
 import br.com.mddeveloper.Model.User;
 
 import java.sql.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,11 +14,11 @@ public class UserRepository {
     }
 
     public int saveUser(User user) throws SQLException {
-        String sql = "INSERT INTO Users(Name, Address, Email, Phone, BirthDate) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO Users(Name, Email, Address, Phone, BirthDate) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getName());
-            stmt.setString(2, user.getAddress());
-            stmt.setString(3, user.getEmail());
+            stmt.setString(2, user.getEmail());
+            stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
             stmt.setDate(5, user.getBirthDate());
             stmt.executeUpdate();
@@ -33,7 +32,7 @@ public class UserRepository {
         }
     }
 
-    public void updateUser(User user) throws SQLException {
+    public void updateUserRepository(User user) throws SQLException {
         String sql = "UPDATE Users SET Name = ?, Email = ?, Address = ?, Phone = ?, BirthDate = ? WHERE ID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, user.getName());

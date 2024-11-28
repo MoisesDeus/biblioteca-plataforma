@@ -11,6 +11,10 @@ public class Inventory {
         this.status = status;
     }
 
+    public Inventory() {
+
+    }
+
     public int getId() {
         return id;
     }

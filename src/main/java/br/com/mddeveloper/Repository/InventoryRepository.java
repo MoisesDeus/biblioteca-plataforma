@@ -13,16 +13,20 @@ public class InventoryRepository {
         this.connection = connection;
     }
 
-    public Inventory saveInventoryItem( Inventory inventory, int catalogId, String status) throws SQLException {
-        String sql = "INSERT INTO Inventory (ID_Catalog, Status) VALUES (?, 'Available')";
+    public int saveInventoryItem(Inventory inventory) throws SQLException {
+        String sql = "INSERT INTO Inventory (ID_Catalog, Status) VALUES (?, ?)";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setInt(1, catalogId);
-            stmt.setString(2, status);
+            stmt.setInt(1, inventory.getIdCatalog());
+            stmt.setString(2, inventory.getStatus());
             stmt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                return rs.getInt(1);
+            } else {
+                throw new SQLException("Falha ao obter o ID gerado.");
+            }
         }
-        return inventory;
     }
 
     public void availableInventoryStatus(int inventoryId) throws SQLException {

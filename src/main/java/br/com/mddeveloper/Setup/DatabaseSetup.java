@@ -35,8 +35,8 @@ public class DatabaseSetup {
                     CREATE TABLE IF NOT EXISTS Users (
                                         ID INTEGER PRIMARY KEY AUTOINCREMENT,
                                         Name TEXT NOT NULL,
-                                        Address TEXT,
                                         Email TEXT UNIQUE,
+                                        Address TEXT,
                                         Phone TEXT,
                                         BirthDate DATE
                                     );

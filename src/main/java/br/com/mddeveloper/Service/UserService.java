@@ -3,9 +3,8 @@ package br.com.mddeveloper.Service;
 import br.com.mddeveloper.Model.User;
 import br.com.mddeveloper.Repository.UserRepository;
 
+import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,6 +12,11 @@ public class UserService {
     private UserRepository userRepository;
     private List<User> userList;
     Scanner scanner  = new Scanner(System.in);
+
+    public UserService(UserRepository userRepository) throws SQLException {
+        this.userRepository = userRepository;
+        this.userList = userRepository.getAllUsers();
+    }
 
     public void displayUsers() {
         userList.forEach(System.out::println);
@@ -37,32 +41,61 @@ public class UserService {
         String phone = scanner.nextLine();
         if (!phone.isEmpty()) user.setPhone(phone);
 
-        System.out.printf("data de Nascimento (%s):\n", user.getBirthDate() != null ? user.getBirthDate() : "Nova data de nascimento");
-        String birthDate = scanner.nextLine();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        if (!birthDate.isEmpty()) user.getBirthDate(LocalDate.parse(birthDate, formatter));
+        Date birthDate;
+        System.out.printf("data de Nascimento (Ano-Mês-Dia):\n", user.getBirthDate() != null ? user.getBirthDate() : "Nova data de nascimento (Ano-Mês-Dia)");
+        String birthDateStr = scanner.nextLine();
+        birthDate = Date.valueOf(birthDateStr);
+        if (!(birthDate == null)) {
+            user.setBirthDate(birthDate);
+        }
 
         return user;
     }
 
     public void addUser() throws SQLException {
-        while (true) {
-            User newUser = getUserForm(null);
+        User newUser = getUserForm(null);
 
-            System.out.println(newUser);
-            System.out.printf("1 - Confirmar o cadastro de usuario.\n");
-            System.out.printf("2 - Cancelar o cadastro de usuario.\n");
-            int confirm = scanner.nextInt();
-            scanner.nextLine();
+        System.out.println(newUser);
+        System.out.printf("1 - Confirmar o cadastro de usuario.\n");
+        System.out.printf("2 - Cancelar o cadastro de usuario.\n");
+        int confirm = scanner.nextInt();
+        scanner.nextLine();
 
-            if (confirm == 1) {
-                int generatedId = userRepository.saveUser(newUser);
-                newUser.setId(generatedId);
-                userList.add(newUser);
-                System.out.println("Usuário cadastrado com sucesso!");
-            } else {
-                System.out.println("Cadastro cancelado.");
+        if (confirm == 1) {
+            int generatedId = userRepository.saveUser(newUser);
+            newUser.setId(generatedId);
+            userList.add(newUser);
+            System.out.println("Usuário cadastrado com sucesso!");
+        } else {
+            System.out.println("Cadastro cancelado.");
+        }
+    }
+
+    public void updateUser() throws SQLException {
+        System.out.println("Digite o código do usuário que deseja editar:");
+        int updateUser = scanner.nextInt();
+        scanner.nextLine();
+
+        User existingUser = null;
+        for (User u : userList) {
+            if (u.getId() == updateUser) {
+                existingUser = u;
+                break;
             }
         }
+
+        if (existingUser != null) {
+            User updatedUser = getUserForm(existingUser);
+            userRepository.updateUserRepository(updatedUser);
+            System.out.println("Usuário atualizado com sucesso!");
+            System.out.println(updatedUser);
+        } else {
+            System.out.println("Usuário não encontrado.");
+        }
+    }
+
+    public void getUsers() {
+        System.out.println("Carregando usuários...");
+        displayUsers();
     }
 }

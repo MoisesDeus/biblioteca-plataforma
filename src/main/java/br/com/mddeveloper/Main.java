@@ -1,8 +1,11 @@
 package br.com.mddeveloper;
 
+import br.com.mddeveloper.Model.Catalog;
 import br.com.mddeveloper.Repository.CatalogRepository;
+import br.com.mddeveloper.Repository.InventoryRepository;
 import br.com.mddeveloper.Repository.UserRepository;
 import br.com.mddeveloper.Service.CatalogService;
+import br.com.mddeveloper.Service.InventoryService;
 import br.com.mddeveloper.Service.UserService;
 import br.com.mddeveloper.Setup.DatabaseSetup;
 import br.com.mddeveloper.Util.DatabaseConnection;
@@ -18,10 +21,13 @@ public class Main {
         Connection connection = DatabaseConnection.getConnection();
 
         UserRepository userRepository = new UserRepository(connection);
-        UserService userService = new UserService();
+        UserService userService = new UserService(userRepository);
+
+        InventoryRepository inventoryRepository = new InventoryRepository(connection);
+        InventoryService  inventoryService = new InventoryService(inventoryRepository);
 
         CatalogRepository catalogRepository = new CatalogRepository(connection);
-        CatalogService catalogService = new CatalogService(catalogRepository);
+        CatalogService catalogService = new CatalogService(catalogRepository, inventoryService);
 
 
 
@@ -50,9 +56,19 @@ public class Main {
                 case 5:
                     catalogService.getBooksCatalog();
                     break;
-                case 7:
-                    userService.addUser();
                 case 6:
+                    userService.addUser();
+                    break;
+                case 7:
+                    userService.updateUser();
+                    break;
+                case 8:
+                    userService.getUsers();
+                    break;
+                case 9:
+                    inventoryService.getInventoryItem();
+                    break;
+                case 10:
                     System.exit(0);
                     scanner.close();
                     break;

@@ -10,13 +10,14 @@ import java.util.Scanner;
 public class CatalogService {
     private CatalogRepository catalogRepository;
     private List<Catalog> catalogList;
-    Catalog addBook = new Catalog();
+    private InventoryService inventoryService;
     Scanner scanner = new Scanner(System.in);
 
 
-    public CatalogService(CatalogRepository catalogRepository) throws SQLException {
+    public CatalogService(CatalogRepository catalogRepository, InventoryService inventoryService) throws SQLException {
         this.catalogRepository = catalogRepository;
         this.catalogList = catalogRepository.getAllCatalogItems();
+        this.inventoryService = inventoryService;
     }
 
     public void displayCatalog() {
@@ -73,9 +74,10 @@ public class CatalogService {
             scanner.nextLine();
 
             if (confirm == 1) {
-                int generatedId = catalogRepository.saveCatalogItem(newBook);
-                newBook.setId(generatedId);
+                int generatedIdCatalog = catalogRepository.saveCatalogItem(newBook);
+                newBook.setId(generatedIdCatalog);
                 catalogList.add(newBook);
+                inventoryService.addBookToInventory(generatedIdCatalog);
                 System.out.println("Livro cadastrado com sucesso!");
             } else {
                 System.out.println("Cadastro cancelado.");
