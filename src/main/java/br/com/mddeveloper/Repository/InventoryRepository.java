@@ -1,5 +1,6 @@
 package br.com.mddeveloper.Repository;
 
+import br.com.mddeveloper.Model.Catalog;
 import br.com.mddeveloper.Model.Inventory;
 
 import java.sql.*;
@@ -43,6 +44,23 @@ public class InventoryRepository {
             stmt.setInt(1, inventoryId);
             stmt.executeUpdate();
         }
+    }
+
+    public List<Inventory> getAllInventory() throws SQLException {
+        List<Inventory> inventoryList = new ArrayList<>();
+        String sql = "SELECT * FROM Inventory";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                Inventory inventory = new Inventory(
+                        rs.getInt("ID"),
+                        rs.getInt("ID_Catalog"),
+                        rs.getString("Status")
+                );
+                inventoryList.add(inventory);
+            }
+        }
+        return inventoryList;
     }
 
 //    public void deleteInventoryItem(int id) throws SQLException {

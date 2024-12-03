@@ -2,10 +2,7 @@ package br.com.mddeveloper.Repository;
 
 import br.com.mddeveloper.Model.Loan;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +15,7 @@ public class LoanRepository {
         this.connection = connection;
     }
 
-    public Loan saveLoan(Loan loan) throws SQLException {
+    public void saveLoan(Loan loan) throws SQLException {
         String sql = "INSERT INTO Loans (ID_Inventory, ID_User, LoanDate, ExpectedReturn) VALUES (?, ?, ?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
@@ -29,22 +26,18 @@ public class LoanRepository {
             stmt.executeUpdate();
         }
         inventoryRepository.borrowedInventoryStatus(loan.getInventory().getId());
-
-        return loan;
     }
 
-    public Loan updateLoan(Loan loan) throws SQLException {
+    public void updateLoan(Date returnDate, Loan loan) throws SQLException {
         String sql = "UPDATE Loans SET ActualReturnDate = ? WHERE ID_Inventory = ? AND ID_User = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
-            stmt.setDate(1, loan.getActualReturnDate());
+            stmt.setDate(1, returnDate);
             stmt.setInt(2, loan.getInventory().getId());
             stmt.setInt(3, loan.getUser().getId());
             stmt.executeUpdate();
         }
         inventoryRepository.availableInventoryStatus(loan.getInventory().getId());
-
-        return loan;
     }
 
     public List<Loan> getLoansActives() throws SQLException {
@@ -71,23 +64,25 @@ public class LoanRepository {
         return loanList;
     }
 
-    public Loan getLoan (Loan loan, int id) throws SQLException {
+    public List<Loan> getLoan (int id) throws SQLException {
+        List<Loan> loanActiveList = new ArrayList<>();
         String sql = "SELECT * FROM loans WHERE ID_inventory = ? OR ID_User = ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return new Loan(
-                            rs.getInt("ID_Inventory"),
-                            rs.getInt("ID_User"),
-                            rs.getDate("LoanDate"),
-                            rs.getDate("ExpectedReturn"),
-                            rs.getDate("ActualReturnDate")
+                while (rs.next()) {
+                    Loan loan = new Loan(
+                    rs.getInt("ID_Inventory"),
+                    rs.getInt("ID_User"),
+                    rs.getDate("LoanDate"),
+                    rs.getDate("ExpectedReturn"),
+                    rs.getDate("ActualReturnDate")
                     );
+                    loanActiveList.add(loan);
                 }
             }
         }
-        return null;
+        return loanActiveList;
     }
 }

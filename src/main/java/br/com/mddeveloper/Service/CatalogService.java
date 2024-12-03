@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class CatalogService {
     private CatalogRepository catalogRepository;
-    private List<Catalog> catalogList;
+    public List<Catalog> catalogList;
     private InventoryService inventoryService;
     Scanner scanner = new Scanner(System.in);
 
@@ -125,10 +125,10 @@ public class CatalogService {
                 System.out.println("Livro não encontrado.");
             }
 
-            System.out.printf("1 - Cadastrar novo livro\n");
-            System.out.printf("2 - Editar livro cadastrado\n");
+            System.out.println("1 - Cadastrar novo livro\n");
+            System.out.println("2 - Editar livro cadastrado\n");
             System.out.println("3 - Excluir livro do catalogo");
-            System.out.printf("3 - Sair\n");
+            System.out.println("3 - Sair\n");
             int option = scanner.nextInt();
             scanner.nextLine();
 
@@ -167,10 +167,10 @@ public class CatalogService {
             System.out.println("Item não encontrado no catálogo.");
         }
 
-        System.out.printf("1 - Cadastrar novo livro\n");
-        System.out.printf("2 - Editar livro cadastrado\n");
+        System.out.println("1 - Cadastrar novo livro\n");
+        System.out.println("2 - Editar livro cadastrado\n");
         System.out.println("3 - Excluir livro do catalogo");
-        System.out.printf("3 - Sair\n");
+        System.out.println("3 - Sair\n");
         int option = scanner.nextInt();
         scanner.nextLine();
 

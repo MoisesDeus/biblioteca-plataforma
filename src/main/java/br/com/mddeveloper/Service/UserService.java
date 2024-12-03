@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 public class UserService {
     private UserRepository userRepository;
-    private List<User> userList;
+    public List<User> userList;
     Scanner scanner  = new Scanner(System.in);
 
     public UserService(UserRepository userRepository) throws SQLException {

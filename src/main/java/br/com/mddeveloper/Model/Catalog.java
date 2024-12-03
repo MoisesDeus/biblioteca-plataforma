@@ -18,7 +18,6 @@ public class Catalog {
     }
 
     public Catalog() {
-
     }
 
     public int getId() {

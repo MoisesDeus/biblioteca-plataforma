@@ -9,9 +9,12 @@ import java.util.Scanner;
 
 public class InventoryService {
     private InventoryRepository inventoryRepository;
+    public List<Inventory> inventoryList;
     Scanner scanner = new Scanner(System.in);
-    public InventoryService(InventoryRepository inventoryRepository) {
+
+    public InventoryService(InventoryRepository inventoryRepository) throws SQLException {
         this.inventoryRepository = inventoryRepository;
+        this.inventoryList = inventoryRepository.getAllInventory();
     }
 
     public void addBookToInventory(int catalogId) throws SQLException {

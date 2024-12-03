@@ -20,6 +20,12 @@ public class Loan {
     public Loan(int idInventory, int idUser, java.sql.Date loanDate, java.sql.Date expectedReturn, java.sql.Date actualReturnDate) {
     }
 
+    public Loan(Catalog bookSelected, User userSelected) {
+    }
+
+    public Loan(Inventory bookSelected, User userSelected) {
+    }
+
     public Inventory getInventory() {
         return inventory;
     }
