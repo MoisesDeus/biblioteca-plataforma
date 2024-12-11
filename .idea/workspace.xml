@@ -5,17 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d39ed53-c0ec-44c8-b790-16f005c67a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/LoanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/library.db" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Catalog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Catalog.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Inventory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Loan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Loan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/InventoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/InventoryRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/LoanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/LoanRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/UserRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/CatalogService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/CatalogService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/InventoryService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/LoanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/LoanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Setup/DatabaseSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Setup/DatabaseSetup.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +29,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="package-info" />
       </list>
     </option>
   </component>
@@ -45,20 +49,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/media/md/HD/Projetos/GerenciamentoDeBiblioteca&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/media/md/HD/Projetos/GerenciamentoDeBiblioteca",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default"
   }
-}</component>
+}]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

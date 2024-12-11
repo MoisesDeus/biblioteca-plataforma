@@ -48,19 +48,6 @@ public class CatalogService {
         if (!pages.isEmpty()) book.setPages(Integer.parseInt(pages));
 
         return book;
-
-//        System.out.println(addBook);
-//        System.out.printf("1 - Confirmar o cadastro do livro.\n");
-//        System.out.printf("2 - Cancelar o cadastro do livro.\n");
-//        int confirm = scanner.nextInt();
-//        scanner.nextLine();
-//
-//        if (confirm == 1) {
-//            catalogList.add(addBook);
-//            catalogRepository.saveCatalogItem(addBook);
-//        }
-//
-//        addBookToCatalog();
     }
 
     public void addBookToCatalog() throws SQLException {
@@ -73,12 +60,23 @@ public class CatalogService {
             int confirm = scanner.nextInt();
             scanner.nextLine();
 
+            System.out.println("Quantas cópias vão ser adicionadas ao inventário?");
+            int copies = scanner.nextInt();
+            scanner.nextLine();
+
             if (confirm == 1) {
                 int generatedIdCatalog = catalogRepository.saveCatalogItem(newBook);
                 newBook.setId(generatedIdCatalog);
                 catalogList.add(newBook);
-                inventoryService.addBookToInventory(generatedIdCatalog);
                 System.out.println("Livro cadastrado com sucesso!");
+                if (copies > 1) {
+                    for (int c = 0; c < copies; c++) {
+                        inventoryService.addBookToInventory(generatedIdCatalog);
+                    }
+                    break;
+                }
+                System.out.println("Cópias cadastradas com sucesso");
+
             } else {
                 System.out.println("Cadastro cancelado.");
             }

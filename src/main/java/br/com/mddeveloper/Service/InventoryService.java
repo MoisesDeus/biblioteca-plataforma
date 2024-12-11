@@ -21,7 +21,6 @@ public class InventoryService {
         Inventory inventoryBook = new Inventory();
         inventoryBook.setIdCatalog(catalogId);
         inventoryBook.setStatus("Available");
-
         int generatedId = inventoryRepository.saveInventoryItem(inventoryBook);
         inventoryBook.setId(generatedId);
 

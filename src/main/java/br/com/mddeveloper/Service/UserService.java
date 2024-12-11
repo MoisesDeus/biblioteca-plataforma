@@ -45,6 +45,7 @@ public class UserService {
         System.out.printf("data de Nascimento (Ano-Mês-Dia):\n", user.getBirthDate() != null ? user.getBirthDate() : "Nova data de nascimento (Ano-Mês-Dia)");
         String birthDateStr = scanner.nextLine();
         birthDate = Date.valueOf(birthDateStr);
+        System.out.println(birthDateStr);
         if (!(birthDate == null)) {
             user.setBirthDate(birthDate);
         }

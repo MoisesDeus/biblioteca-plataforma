@@ -3,7 +3,9 @@ package br.com.mddeveloper.Service;
 import br.com.mddeveloper.Model.Inventory;
 import br.com.mddeveloper.Model.Loan;
 import br.com.mddeveloper.Model.User;
+import br.com.mddeveloper.Repository.InventoryRepository;
 import br.com.mddeveloper.Repository.LoanRepository;
+import br.com.mddeveloper.Repository.UserRepository;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -13,13 +15,17 @@ import java.util.Scanner;
 
 public class LoanService {
     private LoanRepository loanRepository;
+    private InventoryRepository inventoryRepository;
+    private UserRepository userRepository;
     public List<Loan> loanList;
 
     Scanner scanner = new Scanner(System.in);
 
-    public LoanService(LoanRepository loanRepository) {
+    public LoanService(LoanRepository loanRepository, InventoryRepository inventoryRepository, UserRepository userRepository) {
         this.loanRepository = loanRepository;
-        this.loanList = loanList;
+        this.inventoryRepository = inventoryRepository;
+        this.userRepository = userRepository;
+        this.loanList = new ArrayList<>();
     }
 
     public void releaseLoan() throws SQLException {
@@ -31,28 +37,18 @@ public class LoanService {
         int userId = scanner.nextInt();
         scanner.nextLine();
 
-        Inventory bookSelected = null;
-        User userSelected = null;
+        Inventory bookSelected = inventoryRepository.getInventoryItemById(bookId);
+        User userSelected = userRepository.getUserById(userId);
+        Inventory isAvailable = inventoryRepository.isAvailable(bookId);
 
-        for (Inventory b : inventoryList) {
-            if (b.getId() == bookId) {
-                bookSelected = b;
-                break;
-            }
-        }
-
-        for (User u : userList) {
-            if (u.getId() == userId)
-                userSelected = u;
-            break;
-        }
-
-        if (bookSelected != null && userSelected != null) {
+        if (bookSelected != null && userSelected != null && isAvailable != null) {
             Loan loan = new Loan(bookSelected, userSelected);
             loanRepository.saveLoan(loan);
             loanList.add(loan);
             System.out.println(loan);
             System.out.printf("Empŕestimo realizado com sucesso!");
+        } else if (isAvailable == null) {
+            System.out.printf("Livro não está disponível");
         } else {
             System.out.printf("Livro ou Usuario não encontrado!");
         }
@@ -63,15 +59,7 @@ public class LoanService {
         int userId = scanner.nextInt();
         scanner.nextLine();
 
-//        Loan existingLoan = null;
-//        for (Loan l : loanList) {
-//            if (l.getUser().getId() == userId) {
-//                existingLoan = l;
-//                break;
-//            }
-//        }
-
-        List<Loan> loansUserActives = loanRepository.getLoan(userId);
+        List<Loan> loansUserActives = loanRepository.getLoanList(userId);
         if (!loansUserActives.isEmpty()) {
             System.out.println("Empréstimos ativos desse usuário");
             loansUserActives.forEach(System.out::println);
@@ -83,13 +71,7 @@ public class LoanService {
         int bookId = scanner.nextShort();
         scanner.nextLine();
 
-        Loan existingLoan = null;
-        for (Loan l : loanList) {
-            if (l.getInventory().getId() == bookId) {
-                existingLoan = l;
-                break;
-            }
-        }
+        Loan existingLoan = loanRepository.getLoan(bookId);
 
         if (existingLoan != null) {
             System.out.println("Digite a data de retorno do empréstimo:");

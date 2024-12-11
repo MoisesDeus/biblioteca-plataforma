@@ -15,6 +15,10 @@ public class Inventory {
 
     }
 
+    public Inventory(int id) {
+        this.id = id;
+    }
+
     public int getId() {
         return id;
     }
@@ -37,5 +41,14 @@ public class Inventory {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    @Override
+    public String toString() {
+        return "Inventory{" +
+                "id=" + id +
+                ", idCatalog=" + idCatalog +
+                ", status='" + status + '\'' +
+                '}';
     }
 }

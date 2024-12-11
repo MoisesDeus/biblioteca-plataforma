@@ -1,5 +1,6 @@
 package br.com.mddeveloper.Model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Loan {
@@ -17,21 +18,23 @@ public class Loan {
         ActualReturnDate = actualReturnDate;
     }
 
-    public Loan(int idInventory, int idUser, java.sql.Date loanDate, java.sql.Date expectedReturn, java.sql.Date actualReturnDate) {
-    }
+    public Loan(int idInventory, int idUser, java.sql.Date loanDate, java.sql.Date expectedReturnDate, java.sql.Date actualReturnDate) {
+        this.inventory = new Inventory(idInventory);
+        this.user = new User(idUser);
+        this.loanDate = loanDate;
+        this.expectedReturnDate = expectedReturnDate;
+        this.ActualReturnDate = actualReturnDate;
 
-    public Loan(Catalog bookSelected, User userSelected) {
     }
 
     public Loan(Inventory bookSelected, User userSelected) {
+        this.inventory = bookSelected;
+        this.user = userSelected;
+        this.loanDate = java.sql.Date.valueOf(LocalDate.now());
     }
 
     public Inventory getInventory() {
         return inventory;
-    }
-
-    public void setInventory(Inventory inventory) {
-        this.inventory = inventory;
     }
 
     public User getUser() {
@@ -64,5 +67,16 @@ public class Loan {
 
     public void setActualReturnDate(Date actualReturnDate) {
         ActualReturnDate = actualReturnDate;
+    }
+
+    @Override
+    public String toString() {
+        return "Loan{" +
+                "inventory=" + inventory +
+                ", user=" + user +
+                ", loanDate=" + loanDate +
+                ", expectedReturnDate=" + expectedReturnDate +
+                ", ActualReturnDate=" + ActualReturnDate +
+                '}';
     }
 }

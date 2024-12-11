@@ -1,5 +1,6 @@
 package br.com.mddeveloper.Repository;
 
+import br.com.mddeveloper.Model.Inventory;
 import br.com.mddeveloper.Model.User;
 
 import java.sql.*;
@@ -20,7 +21,7 @@ public class UserRepository {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
-            stmt.setDate(5, user.getBirthDate());
+            stmt.setDate(5, new Date(user.getBirthDate().getTime()));
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -62,5 +63,26 @@ public class UserRepository {
             }
         }
         return userList;
+    }
+
+    public User getUserById(int id) throws SQLException {
+        String sql = "SELECT * FROM Users WHERE ID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    return new User(
+                            rs.getInt("ID"),
+                            rs.getString("Name"),
+                            rs.getString("Email"),
+                            rs.getString("Address"),
+                            rs.getString("Phone"),
+                            rs.getDate("BirthDate")
+                    );
+                }
+            }
+        }
+        return null;
     }
 }

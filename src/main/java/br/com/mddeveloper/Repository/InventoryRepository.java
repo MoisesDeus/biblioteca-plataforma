@@ -1,6 +1,5 @@
 package br.com.mddeveloper.Repository;
 
-import br.com.mddeveloper.Model.Catalog;
 import br.com.mddeveloper.Model.Inventory;
 
 import java.sql.*;
@@ -39,7 +38,7 @@ public class InventoryRepository {
     }
 
     public void borrowedInventoryStatus(int inventoryId) throws SQLException {
-        String sql = "UPDATE Inventory SET Status = 'Borrowed'";
+        String sql = "UPDATE Inventory SET Status = 'Borrowed' WHERE ID = ?";
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, inventoryId);
             stmt.executeUpdate();
@@ -123,6 +122,20 @@ public class InventoryRepository {
                             rs.getInt("ID_Catalog"),
                             rs.getString("Status")
                     );
+                }
+            }
+        }
+        return null;
+    }
+
+    public Inventory isAvailable(int id) throws SQLException{
+        String sql = "SELECT Status FROM Inventory WHERE ID = ?";
+
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setInt(1, id);
+            try (ResultSet rs = stmt.executeQuery()) {
+                if (rs.next()) {
+                    rs.getString("Status");
                 }
             }
         }

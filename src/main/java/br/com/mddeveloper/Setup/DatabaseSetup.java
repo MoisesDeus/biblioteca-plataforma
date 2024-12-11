@@ -47,7 +47,7 @@ public class DatabaseSetup {
                                         ID_Inventory INTEGER NOT NULL,
                                         ID_User INTEGER NOT NULL,
                                         LoanDate DATE NOT NULL,
-                                        ExpectedReturnDate DATE NOT NULL,
+                                        ExpectedReturnDate DATE,
                                         ActualReturnDate DATE,
                                         FOREIGN KEY (ID_Inventory) REFERENCES Inventory(ID),
                                         FOREIGN KEY (ID_User) REFERENCES Users(ID)
