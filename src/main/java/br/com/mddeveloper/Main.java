@@ -32,7 +32,7 @@ public class Main {
         CatalogService catalogService = new CatalogService(catalogRepository, inventoryService);
 
         LoanRepository loanRepository = new LoanRepository(connection, inventoryRepository, userRepository);
-        LoanService loanService = new LoanService(loanRepository, inventoryRepository, userRepository);
+        LoanService loanService = new LoanService(loanRepository, inventoryRepository, userRepository, inventoryService);
 
 
 

@@ -16,16 +16,18 @@ import java.util.Scanner;
 public class LoanService {
     private LoanRepository loanRepository;
     private InventoryRepository inventoryRepository;
+    private InventoryService inventoryService;
     private UserRepository userRepository;
     public List<Loan> loanList;
 
     Scanner scanner = new Scanner(System.in);
 
-    public LoanService(LoanRepository loanRepository, InventoryRepository inventoryRepository, UserRepository userRepository) {
+    public LoanService(LoanRepository loanRepository, InventoryRepository inventoryRepository, UserRepository userRepository, InventoryService inventoryService) {
         this.loanRepository = loanRepository;
         this.inventoryRepository = inventoryRepository;
         this.userRepository = userRepository;
         this.loanList = new ArrayList<>();
+        this.inventoryService = inventoryService;
     }
 
     public void releaseLoan() throws SQLException {
@@ -39,15 +41,15 @@ public class LoanService {
 
         Inventory bookSelected = inventoryRepository.getInventoryItemById(bookId);
         User userSelected = userRepository.getUserById(userId);
-        Inventory isAvailable = inventoryRepository.isAvailable(bookId);
+        boolean isAvailable = inventoryService.bookIsAvailable(bookId);
 
-        if (bookSelected != null && userSelected != null && isAvailable != null) {
+        if (bookSelected != null && userSelected != null && isAvailable) {
             Loan loan = new Loan(bookSelected, userSelected);
             loanRepository.saveLoan(loan);
             loanList.add(loan);
             System.out.println(loan);
             System.out.printf("Empŕestimo realizado com sucesso!");
-        } else if (isAvailable == null) {
+        } else if (!isAvailable) {
             System.out.printf("Livro não está disponível");
         } else {
             System.out.printf("Livro ou Usuario não encontrado!");
@@ -82,5 +84,9 @@ public class LoanService {
         } else {
             System.out.println("Aconteceu algum erro. ):");
         }
+    }
+
+    public void expectedReturn() {
+
     }
 }

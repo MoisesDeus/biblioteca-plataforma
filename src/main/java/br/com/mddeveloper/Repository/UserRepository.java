@@ -2,6 +2,7 @@ package br.com.mddeveloper.Repository;
 
 import br.com.mddeveloper.Model.Inventory;
 import br.com.mddeveloper.Model.User;
+import br.com.mddeveloper.Util.DateUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class UserRepository {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
-            stmt.setDate(5, new Date(user.getBirthDate().getTime()));
+            stmt.setDate(5, DateUtils.toSqlDate(user.getBirthDate()));
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -40,7 +41,7 @@ public class UserRepository {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
-            stmt.setDate(5, user.getBirthDate());
+            stmt.setDate(5, DateUtils.toSqlDate(user.getBirthDate()));
             stmt.executeUpdate();
         }
     }
@@ -57,7 +58,7 @@ public class UserRepository {
                         rs.getString("Email"),
                         rs.getString("Address"),
                         rs.getString("Phone"),
-                        rs.getDate("BirthDate")
+                        DateUtils.toLocalDate(rs.getDate("BirthDate"))
                 );
                 userList.add(user);
             }
@@ -78,7 +79,7 @@ public class UserRepository {
                             rs.getString("Email"),
                             rs.getString("Address"),
                             rs.getString("Phone"),
-                            rs.getDate("BirthDate")
+                            DateUtils.toLocalDate(rs.getDate("BirthDate"))
                     );
                 }
             }

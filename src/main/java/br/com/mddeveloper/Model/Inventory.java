@@ -19,6 +19,10 @@ public class Inventory {
         this.id = id;
     }
 
+    public Inventory(String status) {
+        this.status = status;
+    }
+
     public int getId() {
         return id;
     }

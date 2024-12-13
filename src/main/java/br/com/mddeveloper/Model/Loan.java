@@ -6,35 +6,39 @@ import java.util.Date;
 public class Loan {
     private Inventory inventory;
     private User user;
-    private Date loanDate;
-    private Date expectedReturnDate;
-    private Date ActualReturnDate;
+    private LocalDate loanDate;
+    private LocalDate expectedReturnDate;
+    private LocalDate actualReturnDate;
 
-    public Loan(Inventory inventory, User user, Date loanDate, Date expectedReturnDate, Date actualReturnDate) {
+    public Loan(Inventory inventory, User user, LocalDate loanDate, LocalDate expectedReturnDate, LocalDate actualReturnDate) {
         this.inventory = inventory;
         this.user = user;
         this.loanDate = loanDate;
         this.expectedReturnDate = expectedReturnDate;
-        ActualReturnDate = actualReturnDate;
+        this.actualReturnDate = actualReturnDate;
     }
 
-    public Loan(int idInventory, int idUser, java.sql.Date loanDate, java.sql.Date expectedReturnDate, java.sql.Date actualReturnDate) {
+    public Loan(int idInventory, int idUser, LocalDate loanDate, LocalDate expectedReturnDate, LocalDate actualReturnDate) {
         this.inventory = new Inventory(idInventory);
         this.user = new User(idUser);
         this.loanDate = loanDate;
         this.expectedReturnDate = expectedReturnDate;
-        this.ActualReturnDate = actualReturnDate;
+        this.actualReturnDate = actualReturnDate;
 
     }
 
     public Loan(Inventory bookSelected, User userSelected) {
         this.inventory = bookSelected;
         this.user = userSelected;
-        this.loanDate = java.sql.Date.valueOf(LocalDate.now());
+        this.loanDate = LocalDate.now();
     }
 
     public Inventory getInventory() {
         return inventory;
+    }
+
+    public void setInventory(Inventory inventory) {
+        this.inventory = inventory;
     }
 
     public User getUser() {
@@ -45,28 +49,28 @@ public class Loan {
         this.user = user;
     }
 
-    public java.sql.Date getLoanDate() {
-        return (java.sql.Date) loanDate;
+    public LocalDate getLoanDate() {
+        return loanDate;
     }
 
-    public void setLoanDate(Date loanDate) {
+    public void setLoanDate(LocalDate loanDate) {
         this.loanDate = loanDate;
     }
 
-    public java.sql.Date getExpectedReturnDate() {
-        return (java.sql.Date) expectedReturnDate;
+    public LocalDate getExpectedReturnDate() {
+        return expectedReturnDate;
     }
 
-    public void setExpectedReturnDate(Date expectedReturnDate) {
+    public void setExpectedReturnDate(LocalDate expectedReturnDate) {
         this.expectedReturnDate = expectedReturnDate;
     }
 
-    public java.sql.Date getActualReturnDate() {
-        return (java.sql.Date) ActualReturnDate;
+    public LocalDate getActualReturnDate() {
+        return actualReturnDate;
     }
 
-    public void setActualReturnDate(Date actualReturnDate) {
-        ActualReturnDate = actualReturnDate;
+    public void setActualReturnDate(LocalDate actualReturnDate) {
+        this.actualReturnDate = actualReturnDate;
     }
 
     @Override
@@ -76,7 +80,7 @@ public class Loan {
                 ", user=" + user +
                 ", loanDate=" + loanDate +
                 ", expectedReturnDate=" + expectedReturnDate +
-                ", ActualReturnDate=" + ActualReturnDate +
+                ", ActualReturnDate=" + actualReturnDate +
                 '}';
     }
 }

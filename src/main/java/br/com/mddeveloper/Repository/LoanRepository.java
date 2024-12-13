@@ -3,6 +3,7 @@ package br.com.mddeveloper.Repository;
 import br.com.mddeveloper.Model.Inventory;
 import br.com.mddeveloper.Model.Loan;
 import br.com.mddeveloper.Model.User;
+import br.com.mddeveloper.Util.DateUtils;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ public class LoanRepository {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, loan.getInventory().getId());
             stmt.setInt(2, loan.getUser().getId());
-            stmt.setDate(3, new java.sql.Date(loan.getLoanDate().getTime()));
+            stmt.setDate(3, DateUtils.toSqlDate(loan.getLoanDate()));
             stmt.executeUpdate();
         }
         inventoryRepository.borrowedInventoryStatus(loan.getInventory().getId());
@@ -58,9 +59,9 @@ public class LoanRepository {
                 Loan loan = new Loan(
                         rs.getInt("ID_Inventory"),
                         rs.getInt("ID_User"),
-                        rs.getDate("LoanDate"),
-                        rs.getDate("ExpectedReturnDate"),
-                        rs.getDate("ActualReturnDate")
+                        DateUtils.toLocalDate(rs.getDate("LoanDate")),
+                        DateUtils.toLocalDate(rs.getDate("ExpectedReturnDate")),
+                        DateUtils.toLocalDate(rs.getDate("ActualReturnDate"))
                 );
                 loanList.add(loan);
             }
@@ -81,9 +82,9 @@ public class LoanRepository {
                     Loan loan = new Loan(
                     inventory,
                     user,
-                    rs.getDate("LoanDate"),
-                    rs.getDate("ExpectedReturnDate"),
-                    rs.getDate("ActualReturnDate")
+                            DateUtils.toLocalDate(rs.getDate("LoanDate")),
+                            DateUtils.toLocalDate(rs.getDate("ExpectedReturnDate")),
+                            DateUtils.toLocalDate(rs.getDate("ActualReturnDate"))
                     );
                     loanActiveList.add(loan);
                 }
@@ -102,9 +103,9 @@ public class LoanRepository {
                     return new Loan(
                             rs.getInt("ID_Inventory"),
                             rs.getInt("ID_User"),
-                            rs.getDate("LoanDate"),
-                            rs.getDate("ExpectedReturnDate"),
-                            rs.getDate("ActualReturnDate")
+                            DateUtils.toLocalDate(rs.getDate("LoanDate")),
+                            DateUtils.toLocalDate(rs.getDate("ExpectedReturnDate")),
+                            DateUtils.toLocalDate(rs.getDate("ActualReturnDate"))
                     );
                 }
             }

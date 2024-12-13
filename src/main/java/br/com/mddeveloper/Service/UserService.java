@@ -2,6 +2,7 @@ package br.com.mddeveloper.Service;
 
 import br.com.mddeveloper.Model.User;
 import br.com.mddeveloper.Repository.UserRepository;
+import br.com.mddeveloper.Util.DateUtils;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -47,7 +48,7 @@ public class UserService {
         birthDate = Date.valueOf(birthDateStr);
         System.out.println(birthDateStr);
         if (!(birthDate == null)) {
-            user.setBirthDate(birthDate);
+            user.setBirthDate(DateUtils.toLocalDate(birthDate));
         }
 
         return user;

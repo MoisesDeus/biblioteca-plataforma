@@ -72,4 +72,10 @@ public class InventoryService {
                 break;
         }
     }
+
+    public boolean bookIsAvailable (int inventoryId) throws SQLException {
+        String bookIsAvailable = (inventoryRepository.isAvailable(inventoryId));
+
+        return bookIsAvailable.equals("Available");
+    }
 }
