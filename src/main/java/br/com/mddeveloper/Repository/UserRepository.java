@@ -5,6 +5,7 @@ import br.com.mddeveloper.Model.User;
 import br.com.mddeveloper.Util.DateUtils;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,7 +23,7 @@ public class UserRepository {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
-            stmt.setDate(5, DateUtils.toSqlDate(user.getBirthDate()));
+            stmt.setString(5, DateUtils.toLocalDateString(user.getBirthDate()));
             stmt.executeUpdate();
 
             ResultSet rs = stmt.getGeneratedKeys();
@@ -41,7 +42,7 @@ public class UserRepository {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
-            stmt.setDate(5, DateUtils.toSqlDate(user.getBirthDate()));
+            stmt.setString(5, DateUtils.toLocalDateString(user.getBirthDate()));
             stmt.executeUpdate();
         }
     }
@@ -58,7 +59,7 @@ public class UserRepository {
                         rs.getString("Email"),
                         rs.getString("Address"),
                         rs.getString("Phone"),
-                        DateUtils.toLocalDate(rs.getDate("BirthDate"))
+                        DateUtils.toSqlDate(LocalDate.parse(rs.getString("BirthDate")))
                 );
                 userList.add(user);
             }
@@ -79,7 +80,8 @@ public class UserRepository {
                             rs.getString("Email"),
                             rs.getString("Address"),
                             rs.getString("Phone"),
-                            DateUtils.toLocalDate(rs.getDate("BirthDate"))
+                            DateUtils.toSqlDate(LocalDate.parse(rs.getString("BirthDate")))
+//                            Date.valueOf(DateUtils.toLocalDate(Date.valueOf(rs.getString("BirthDate"))))
                     );
                 }
             }

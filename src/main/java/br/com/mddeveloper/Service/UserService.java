@@ -48,7 +48,7 @@ public class UserService {
         birthDate = Date.valueOf(birthDateStr);
         System.out.println(birthDateStr);
         if (!(birthDate == null)) {
-            user.setBirthDate(DateUtils.toLocalDate(birthDate));
+            user.setBirthDate(Date.valueOf(DateUtils.toLocalDate(birthDate)));
         }
 
         return user;

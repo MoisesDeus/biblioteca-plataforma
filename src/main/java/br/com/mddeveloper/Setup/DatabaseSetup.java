@@ -38,7 +38,7 @@ public class DatabaseSetup {
                                         Email TEXT UNIQUE,
                                         Address TEXT,
                                         Phone TEXT,
-                                        BirthDate DATE
+                                        BirthDate TEXT
                                     );
                     """;
 
@@ -46,9 +46,9 @@ public class DatabaseSetup {
                      CREATE TABLE IF NOT EXISTS Loans (
                                         ID_Inventory INTEGER NOT NULL,
                                         ID_User INTEGER NOT NULL,
-                                        LoanDate DATE NOT NULL,
-                                        ExpectedReturnDate DATE,
-                                        ActualReturnDate DATE,
+                                        LoanDate INTEGER NOT NULL,
+                                        ExpectedReturnDate INTEGER,
+                                        ActualReturnDate INTEGER,
                                         FOREIGN KEY (ID_Inventory) REFERENCES Inventory(ID),
                                         FOREIGN KEY (ID_User) REFERENCES Users(ID)
                                     );

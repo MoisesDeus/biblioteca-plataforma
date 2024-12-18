@@ -5,19 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2d39ed53-c0ec-44c8-b790-16f005c67a55" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Util/DateUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" afterPath="$PROJECT_DIR$/library.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Inventory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Inventory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Loan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/Loan.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/library.db" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Model/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/InventoryRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/InventoryRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/LoanRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/LoanRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/InventoryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/InventoryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/LoanService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/LoanService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Setup/DatabaseSetup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Setup/DatabaseSetup.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Util/DateUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/br/com/mddeveloper/Util/DateUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,5 +81,12 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="first commit" />
     <option name="LAST_COMMIT_MESSAGE" value="" />
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="br.com.mddeveloper.Model.User" memberName="birthDate" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>
