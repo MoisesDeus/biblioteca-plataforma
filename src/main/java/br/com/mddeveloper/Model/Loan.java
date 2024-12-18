@@ -31,6 +31,7 @@ public class Loan {
         this.inventory = bookSelected;
         this.user = userSelected;
         this.loanDate = LocalDate.now();
+        this.expectedReturnDate = LocalDate.now().plusDays(30);
     }
 
     public Inventory getInventory() {

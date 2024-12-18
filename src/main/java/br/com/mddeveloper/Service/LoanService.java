@@ -6,6 +6,7 @@ import br.com.mddeveloper.Model.User;
 import br.com.mddeveloper.Repository.InventoryRepository;
 import br.com.mddeveloper.Repository.LoanRepository;
 import br.com.mddeveloper.Repository.UserRepository;
+import br.com.mddeveloper.Util.DateUtils;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -22,11 +23,11 @@ public class LoanService {
 
     Scanner scanner = new Scanner(System.in);
 
-    public LoanService(LoanRepository loanRepository, InventoryRepository inventoryRepository, UserRepository userRepository, InventoryService inventoryService) {
+    public LoanService(LoanRepository loanRepository, InventoryRepository inventoryRepository, UserRepository userRepository, InventoryService inventoryService) throws SQLException {
         this.loanRepository = loanRepository;
         this.inventoryRepository = inventoryRepository;
         this.userRepository = userRepository;
-        this.loanList = new ArrayList<>();
+        this.loanList = loanRepository.getLoansActives();
         this.inventoryService = inventoryService;
     }
 
@@ -86,7 +87,24 @@ public class LoanService {
         }
     }
 
-    public void expectedReturn() {
-
+    public void loanActives() {
+        loanList.forEach(System.out::println);
     }
+
+//    private Date expectedReturn(Loan loan) {
+//        System.out.println("Esse livro vai ser emprestado por quantos dias?");
+//        System.out.println("1 - 15 dias");
+//        System.out.println("2 - 20 dias");
+//        System.out.println("3 - 30 dias");
+//        int choose = scanner.nextInt();
+//
+//        if (choose == 1) {
+//
+//        } else if (choose == 2) {
+//
+//        } else if (choose == 3) {
+//
+//        }
+//        return null;
+//    }
 }

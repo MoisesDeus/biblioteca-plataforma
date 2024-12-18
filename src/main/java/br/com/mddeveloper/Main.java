@@ -80,6 +80,9 @@ public class Main {
                     loanService.returnLoan();
                     break;
                 case 12:
+                    loanService.loanActives();
+                    break;
+                case 13:
                     System.exit(0);
                     scanner.close();
                     break;
