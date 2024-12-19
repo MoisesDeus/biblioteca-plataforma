@@ -45,7 +45,7 @@ public class LoanService {
         boolean isAvailable = inventoryService.bookIsAvailable(bookId);
 
         if (bookSelected != null && userSelected != null && isAvailable) {
-            Loan loan = new Loan(bookSelected, userSelected);
+            Loan loan = new Loan(bookSelected, userSelected, expectedReturn());
             loanRepository.saveLoan(loan);
             loanList.add(loan);
             System.out.println(loan);
@@ -91,20 +91,21 @@ public class LoanService {
         loanList.forEach(System.out::println);
     }
 
-//    private Date expectedReturn(Loan loan) {
-//        System.out.println("Esse livro vai ser emprestado por quantos dias?");
-//        System.out.println("1 - 15 dias");
-//        System.out.println("2 - 20 dias");
-//        System.out.println("3 - 30 dias");
-//        int choose = scanner.nextInt();
-//
-//        if (choose == 1) {
-//
-//        } else if (choose == 2) {
-//
-//        } else if (choose == 3) {
-//
-//        }
-//        return null;
-//    }
+    private int expectedReturn() {
+        System.out.println("Esse livro vai ser emprestado por quantos dias?");
+        System.out.println("1 - 15 dias");
+        System.out.println("2 - 20 dias");
+        System.out.println("3 - 30 dias");
+        int chooseDate = scanner.nextInt();
+
+        if (chooseDate == 1) {
+            return 15;
+        } else if (chooseDate == 2) {
+            return 20;
+        } else if (chooseDate == 3) {
+            return 30;
+        }
+        return 15;
+
+    }
 }

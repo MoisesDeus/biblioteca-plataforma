@@ -27,11 +27,11 @@ public class Loan {
 
     }
 
-    public Loan(Inventory bookSelected, User userSelected) {
+    public Loan(Inventory bookSelected, User userSelected, int returnDate) {
         this.inventory = bookSelected;
         this.user = userSelected;
         this.loanDate = LocalDate.now();
-        this.expectedReturnDate = LocalDate.now().plusDays(30);
+        this.expectedReturnDate = LocalDate.now().plusDays(returnDate);
     }
 
     public Inventory getInventory() {
