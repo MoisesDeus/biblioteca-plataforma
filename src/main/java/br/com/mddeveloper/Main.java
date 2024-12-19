@@ -1,6 +1,6 @@
 package br.com.mddeveloper;
 
-import br.com.mddeveloper.Model.Catalog;
+import br.com.mddeveloper.Controller.MenuController;
 import br.com.mddeveloper.Repository.CatalogRepository;
 import br.com.mddeveloper.Repository.InventoryRepository;
 import br.com.mddeveloper.Repository.LoanRepository;
@@ -14,11 +14,9 @@ import br.com.mddeveloper.Util.DatabaseConnection;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        Scanner scanner = new Scanner(System.in);
         DatabaseSetup.initialize();
         Connection connection = DatabaseConnection.getConnection();
 
@@ -34,61 +32,7 @@ public class Main {
         LoanRepository loanRepository = new LoanRepository(connection, inventoryRepository, userRepository);
         LoanService loanService = new LoanService(loanRepository, inventoryRepository, userRepository, inventoryService);
 
-
-
-        System.out.println("Bem vindo a Biblioteca da Plataforma Impact");
-
-        while (true) {
-            System.out.printf("\nEscolha uma opção:\n");
-            System.out.printf("1 - Adicionar livro no catalago\n");
-
-            int opcao = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (opcao) {
-                case 1:
-                    catalogService.addBookToCatalog();
-                    break;
-                case 2:
-                    catalogService.displayCatalog();
-                    break;
-                case 3:
-                    catalogService.updateBookCatalog();
-                    break;
-                case 4:
-                    catalogService.deleteBookCatalog();
-                    break;
-                case 5:
-                    catalogService.getBooksCatalog();
-                    break;
-                case 6:
-                    userService.addUser();
-                    break;
-                case 7:
-                    userService.updateUser();
-                    break;
-                case 8:
-                    userService.getUsers();
-                    break;
-                case 9:
-                    inventoryService.getInventoryItem();
-                    break;
-                case 10:
-                    loanService.releaseLoan();
-                    break;
-                case 11:
-                    loanService.returnLoan();
-                    break;
-                case 12:
-                    loanService.loanActives();
-                    break;
-                case 13:
-                    System.exit(0);
-                    scanner.close();
-                    break;
-                default:
-                    System.out.println("Opção Inválida.");
-            }
-        }
+        MenuController menuController = new MenuController(catalogService, inventoryService, userService, loanService);
+        menuController.showMainMenu();
     }
 }
