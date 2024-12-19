@@ -3,6 +3,7 @@ package br.com.mddeveloper.Service;
 import br.com.mddeveloper.Model.User;
 import br.com.mddeveloper.Repository.UserRepository;
 import br.com.mddeveloper.Util.DateUtils;
+import br.com.mddeveloper.Util.InputUtils;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -26,30 +27,50 @@ public class UserService {
     private User getUserForm(User existingUser) {
         User user = existingUser != null ? existingUser : new User();
 
-        System.out.printf("Nome (%s):\n", user.getName() != null ? user.getName() : "Novo nome:");
-        String name = scanner.nextLine();
-        if (!name.isEmpty()) user.setName(name);
+        //Antiga
+//        System.out.printf("Nome (%s):\n", user.getName() != null ? user.getName() : "Novo nome:");
+//        String name = scanner.nextLine();
+//        if (!name.isEmpty()) user.setName(name);
 
-        System.out.printf("Email (%s):\n", user.getEmail() != null ? user.getEmail() : "Novo email");
-        String email = scanner.nextLine();
-        if (!email.isEmpty()) user.setEmail(email);
+        String name = InputUtils.getStringInput("Nome", user.getName());
+        user.setName(name);
 
-        System.out.printf("Endereço (%s):\n", user.getAddress() != null ? user.getAddress() : "Novo Endereço");
-        String address = scanner.nextLine();
-        if (!address.isEmpty()) user.setAddress(address);
+        //Antiga
+//        System.out.printf("Email (%s):\n", user.getEmail() != null ? user.getEmail() : "Novo email");
+//        String email = scanner.nextLine();
+//        if (!email.isEmpty()) user.setEmail(email);
 
-        System.out.printf("telefone (%s):\n", user.getPhone() != null ? user.getPhone() : "Novo telefone");
-        String phone = scanner.nextLine();
-        if (!phone.isEmpty()) user.setPhone(phone);
+        String email = InputUtils.getEmailInput("Email", user.getEmail());
+        user.setEmail(email);
 
-        Date birthDate;
-        System.out.printf("data de Nascimento (Ano-Mês-Dia):\n", user.getBirthDate() != null ? user.getBirthDate() : "Nova data de nascimento (Ano-Mês-Dia)");
-        String birthDateStr = scanner.nextLine();
-        birthDate = Date.valueOf(birthDateStr);
-        System.out.println(birthDateStr);
-        if (!(birthDate == null)) {
-            user.setBirthDate(Date.valueOf(DateUtils.toLocalDate(birthDate)));
-        }
+        //Antiga
+//        System.out.printf("Endereço (%s):\n", user.getAddress() != null ? user.getAddress() : "Novo Endereço");
+//        String address = scanner.nextLine();
+//        if (!address.isEmpty()) user.setAddress(address);
+
+        String address = InputUtils.getStringInput("Endereço", user.getAddress());
+        user.setAddress(address);
+
+        //Antiga
+//        System.out.printf("telefone (%s):\n", user.getPhone() != null ? user.getPhone() : "Novo telefone");
+//        String phone = scanner.nextLine();
+//        if (!phone.isEmpty()) user.setPhone(phone);
+
+        String phone = InputUtils.getPhoneInput("Telefone", user.getPhone());
+        user.setPhone(phone);
+
+        //Antiga
+//        Date birthDate;
+//        System.out.printf("data de Nascimento (Ano-Mês-Dia):\n", user.getBirthDate() != null ? user.getBirthDate() : "Nova data de nascimento (Ano-Mês-Dia)");
+//        String birthDateStr = scanner.nextLine();
+//        birthDate = Date.valueOf(birthDateStr);
+//        System.out.println(birthDateStr);
+//        if (!(birthDate == null)) {
+//            user.setBirthDate(Date.valueOf(DateUtils.toLocalDate(birthDate)));
+//        }
+
+        Date birthDate = InputUtils.getDateInput("Data de nascimento (ANO-MÊS-DIA)", user.getBirthDate());
+        user.setBirthDate(birthDate);
 
         return user;
     }

@@ -2,6 +2,7 @@ package br.com.mddeveloper.Service;
 
 import br.com.mddeveloper.Model.Catalog;
 import br.com.mddeveloper.Repository.CatalogRepository;
+import br.com.mddeveloper.Util.InputUtils;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -27,21 +28,33 @@ public class CatalogService {
     private Catalog getBookForm(Catalog existingBook) {
         Catalog book = existingBook != null ? existingBook : new Catalog();
 
-        System.out.printf("Título do livro (%s):\n", book.getTitle() != null ? book.getTitle() : "Novo título");
-        String title = scanner.nextLine();
-        if (!title.isEmpty()) book.setTitle(title);
+        //Antiga
+//        System.out.printf("Título do livro (%s):\n", book.getTitle() != null ? book.getTitle() : "Novo título");
+//        String title = scanner.nextLine();
+//        if (!title.isEmpty()) book.setTitle(title);
 
-        System.out.printf("Nome do autor (%s):\n", book.getAuthor() != null ? book.getAuthor() : "Novo autor");
-        String author = scanner.nextLine();
-        if (!author.isEmpty()) book.setAuthor(author);
+        String title = InputUtils.getStringInput("Titulo do livro", book.getTitle());
+        book.setTitle(title);
 
-        System.out.printf("Gênero do livro (%s):\n", book.getGenre() != null ? book.getGenre() : "Novo gênero");
-        String genre = scanner.nextLine();
-        if (!genre.isEmpty()) book.setGenre(genre);
+        //Antiga
+//        System.out.printf("Nome do autor (%s):\n", book.getAuthor() != null ? book.getAuthor() : "Novo autor");
+//        String author = scanner.nextLine();
+//        if (!author.isEmpty()) book.setAuthor(author);
+
+        String author = InputUtils.getStringInput("Nome do autor(a)", book.getAuthor());
+        book.setAuthor(author);
+
+//        System.out.printf("Gênero do livro (%s):\n", book.getGenre() != null ? book.getGenre() : "Novo gênero");
+//        String genre = scanner.nextLine();
+//        if (!genre.isEmpty()) book.setGenre(genre);
+
+        String genre = InputUtils.getStringInput("Gênero do livro", book.getGenre());
+        book.setGenre(genre);
 
         System.out.printf("Ano de lançamento (%d):\n", book.getYear() != 0 ? book.getYear() : 0);
         String year = scanner.nextLine();
         if (!year.isEmpty()) book.setYear(Integer.parseInt(year));
+
 
         System.out.printf("Quantidade de páginas (%d):\n", book.getPages() != 0 ? book.getPages() : 0);
         String pages = scanner.nextLine();
