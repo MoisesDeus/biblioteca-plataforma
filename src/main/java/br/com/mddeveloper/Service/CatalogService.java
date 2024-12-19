@@ -64,96 +64,53 @@ public class CatalogService {
     }
 
     public void addBookToCatalog() throws SQLException {
-        while (true) {
-            Catalog newBook = getBookForm(null);
 
-            System.out.println(newBook);
-            System.out.printf("1 - Confirmar o cadastro do livro.\n");
-            System.out.printf("2 - Cancelar o cadastro do livro.\n");
-            int confirm = scanner.nextInt();
-            scanner.nextLine();
+        Catalog newBook = getBookForm(null);
 
-            System.out.println("Quantas cópias vão ser adicionadas ao inventário?");
-            int copies = scanner.nextInt();
-            scanner.nextLine();
+        System.out.println(newBook);
+        System.out.printf("1 - Confirmar o cadastro do livro.\n");
+        System.out.printf("2 - Cancelar o cadastro do livro.\n");
+        int confirm = scanner.nextInt();
+        scanner.nextLine();
 
-            if (confirm == 1) {
-                int generatedIdCatalog = catalogRepository.saveCatalogItem(newBook);
-                newBook.setId(generatedIdCatalog);
-                catalogList.add(newBook);
-                System.out.println("Livro cadastrado com sucesso!");
-                if (copies > 1) {
-                    for (int c = 0; c < copies; c++) {
-                        inventoryService.addBookToInventory(generatedIdCatalog);
-                    }
-                    break;
+        System.out.println("Quantas cópias vão ser adicionadas ao inventário?");
+        int copies = scanner.nextInt();
+        scanner.nextLine();
+
+        if (confirm == 1) {
+            int generatedIdCatalog = catalogRepository.saveCatalogItem(newBook);
+            newBook.setId(generatedIdCatalog);
+            catalogList.add(newBook);
+            System.out.println("Livro cadastrado com sucesso!");
+            if (copies > 1) {
+                for (int c = 0; c < copies; c++) {
+                    inventoryService.addBookToInventory(generatedIdCatalog);
                 }
-                System.out.println("Cópias cadastradas com sucesso");
-
-            } else {
-                System.out.println("Cadastro cancelado.");
             }
+            System.out.println("Cópias cadastradas com sucesso");
 
-            System.out.printf("1 - Cadastrar novo livro\n");
-            System.out.printf("2 - Editar livro cadastrado\n");
-            System.out.println("3 - Excluir livro do catalogo");
-            System.out.printf("4 - Sair\n");
-            int option = scanner.nextInt();
-            scanner.nextLine();
-
-            if (option == 1) {
-                addBookToCatalog();
-            } else if (option == 2) {
-                updateBookCatalog();
-            } else if (option == 3) {
-                deleteBookCatalog();
-            } else {
-                System.exit(0);
-            }
+        } else {
+            System.out.println("Cadastro cancelado.");
         }
+
     }
 
     public void updateBookCatalog() throws SQLException {
-        while (true) {
-            System.out.println("Digite o código do livro que deseja editar:");
-            int updateBook = scanner.nextInt();
-            scanner.nextLine();
 
-            Catalog existingBook = null;
-            for (Catalog b : catalogList) {
-                if (b.getId() == updateBook) {
-                    existingBook = b;
-                    break;
-                }
-            }
+        System.out.println("Digite o código do livro que deseja editar:");
+        int updateBook = scanner.nextInt();
+        scanner.nextLine();
 
-            if (existingBook != null) {
-                Catalog updatedBook = getBookForm(existingBook);
-                catalogRepository.updateCatalogItem(updatedBook);
-                System.out.println("Livro atualizado com sucesso!");
-                System.out.println(updatedBook);
-            } else {
-                System.out.println("Livro não encontrado.");
-            }
+        Catalog existingBook = catalogRepository.getCatalogItemById(updateBook);
 
-            System.out.println("1 - Cadastrar novo livro\n");
-            System.out.println("2 - Editar livro cadastrado\n");
-            System.out.println("3 - Excluir livro do catalogo");
-            System.out.println("3 - Sair\n");
-            int option = scanner.nextInt();
-            scanner.nextLine();
-
-            if (option == 1) {
-                addBookToCatalog();
-            } else if (option == 2) {
-                updateBookCatalog();
-            } else if (option == 3) {
-                deleteBookCatalog();
-            } else {
-                System.exit(0);
-            }
+        if (existingBook != null) {
+            Catalog updatedBook = getBookForm(existingBook);
+            catalogRepository.updateCatalogItem(updatedBook);
+            System.out.println("Livro atualizado com sucesso!");
+            System.out.println(updatedBook);
+        } else {
+            System.out.println("Livro não encontrado.");
         }
-
     }
 
     public void deleteBookCatalog() throws SQLException {
@@ -161,14 +118,7 @@ public class CatalogService {
         int bookToDelete = scanner.nextInt();
         scanner.nextLine();
 
-        Catalog removeBook = null;
-
-        for (Catalog b : catalogList) {
-            if (b.getId() == bookToDelete) {
-                removeBook = b;
-                break;
-            }
-        }
+        Catalog removeBook = catalogRepository.getCatalogItemById(bookToDelete);
 
         if (removeBook != null) {
             catalogRepository.deleteCatalogItem(bookToDelete);
@@ -176,23 +126,6 @@ public class CatalogService {
             System.out.println("Item excluído com sucesso!");
         } else {
             System.out.println("Item não encontrado no catálogo.");
-        }
-
-        System.out.println("1 - Cadastrar novo livro\n");
-        System.out.println("2 - Editar livro cadastrado\n");
-        System.out.println("3 - Excluir livro do catalogo");
-        System.out.println("3 - Sair\n");
-        int option = scanner.nextInt();
-        scanner.nextLine();
-
-        if (option == 1) {
-            addBookToCatalog();
-        } else if (option == 2) {
-            updateBookCatalog();
-        } else if (option == 3) {
-            deleteBookCatalog();
-        } else {
-            System.exit(0);
         }
     }
 
@@ -216,16 +149,6 @@ public class CatalogService {
                     System.out.println("Nenhum livro encontrado com o título informado");
                 }
                 break;
-
-//                for (Catalog b : catalogList) {
-//                    if (b.getTitle().equals(title)) {
-//                        //catalogRepository.getCatalogItemsByTitle(title);
-//                        System.out.println("Encontrado: \n" + catalogRepository.getCatalogItemsByTitle(title));
-//                    } else {
-//                        System.out.println("Livro não encontrado no catalogo");
-//                    }
-//                }
-//                break;
             case 2:
                 System.out.printf("Digite o nome do autor:");
                 String author = scanner.nextLine();

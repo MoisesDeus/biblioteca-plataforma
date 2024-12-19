@@ -37,8 +37,8 @@ public class CatalogRepository {
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, catalog.getTitle());
             stmt.setString(2, catalog.getAuthor());
-            stmt.setString(4, catalog.getGenre());
-            stmt.setInt(3, catalog.getYear());
+            stmt.setString(3, catalog.getGenre());
+            stmt.setInt(4, catalog.getYear());
             stmt.setInt(5, catalog.getPages());
             stmt.setInt(6, catalog.getId());
             stmt.executeUpdate();

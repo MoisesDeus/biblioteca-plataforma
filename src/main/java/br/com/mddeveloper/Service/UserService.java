@@ -99,13 +99,7 @@ public class UserService {
         int updateUser = scanner.nextInt();
         scanner.nextLine();
 
-        User existingUser = null;
-        for (User u : userList) {
-            if (u.getId() == updateUser) {
-                existingUser = u;
-                break;
-            }
-        }
+        User existingUser = userRepository.getUserById(updateUser);
 
         if (existingUser != null) {
             User updatedUser = getUserForm(existingUser);

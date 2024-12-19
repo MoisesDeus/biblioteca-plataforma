@@ -23,8 +23,6 @@ public class InventoryService {
         inventoryBook.setStatus("Available");
         int generatedId = inventoryRepository.saveInventoryItem(inventoryBook);
         inventoryBook.setId(generatedId);
-
-        System.out.println("Item adicionado ao inventário com sucesso");
     }
 
     public void getInventoryItem() throws SQLException {
