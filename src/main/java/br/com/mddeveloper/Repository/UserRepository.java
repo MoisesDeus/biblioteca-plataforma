@@ -43,6 +43,7 @@ public class UserRepository {
             stmt.setString(3, user.getAddress());
             stmt.setString(4, user.getPhone());
             stmt.setString(5, DateUtils.toLocalDateString(user.getBirthDate()));
+            stmt.setInt(6, user.getId());
             stmt.executeUpdate();
         }
     }
